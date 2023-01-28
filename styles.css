@@ -1,0 +1,281 @@
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: paleturquoise;
+  padding: 0;
+}
+
+.card-container {
+  width: 80vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: auto;
+  grid-gap: 40px;
+  /* position: relative;
+  left: 40px; */
+}
+
+.favorites-collection {
+  position: fixed;
+  top: 0px;
+  right: 0;
+  left: 0;
+  right: 0;
+  background-color: paleturquoise;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  display: none;
+  overflow-y: scroll;
+}
+
+.favorites-collection h3,
+.main-collection h3 {
+  text-align: center;
+  font-size: 30px;
+}
+
+.mortyCards {
+  position: relative;
+}
+
+.image-wrapper {
+  width: 300px;
+  height: 300px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.852);
+  z-index: 1;
+  transition: 0.4s;
+  opacity: 0;
+  height: 300px;
+  width: 300px;
+  backdrop-filter: blur(3px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.before-like {
+  z-index: 3;
+}
+
+.overlay:hover {
+  opacity: 1;
+}
+
+.someText {
+  color: rgb(235, 235, 235);
+  font-size: 1.75rem;
+}
+
+.character {
+  width: 200px;
+  height: 200px;
+  background-color: rgb(0, 234, 255);
+}
+
+.character:hover {
+  filter: blur();
+}
+
+.overlay h6 {
+  margin: 10px 0;
+}
+
+.overlay .before-like {
+  padding: 5px 10px;
+  max-width: 50%;
+  border: transparent;
+  background: transparent;
+  color: rgb(201, 0, 0);
+  font-size: 2.75rem;
+  font-weight: 600;
+  position: absolute;
+  bottom: -5px;
+  right: 5px;
+}
+
+.overlay .unHover {
+  position: absolute;
+  bottom: -5px;
+  right: 5px;
+  color: red;
+  background: transparent;
+  font-size: 2.75rem;
+  font-weight: 600;
+  position: absolute;
+  bottom: -5px;
+  right: 5px;
+  padding: 5px 10px;
+  max-width: 50%;
+  border: transparent;
+}
+
+nav.navbar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4%;
+  position: static;
+  z-index: 10;
+}
+
+.navbar img {
+  width: 600px;
+  max-width: 45%;
+}
+
+.logo-on-favorites-page {
+  position: relative;
+  max-width: 45%;
+  top: 8px;
+}
+
+.logo {
+  margin: auto;
+}
+
+.alphabetize,
+.z-a,
+.slider-tab-open {
+  position: fixed;
+  top: 30px;
+  left: 10px;
+  background: #4eacc4;
+  font-size: 1.6rem;
+  border-radius: 2px;
+  font-family: "Indie Flower", cursive;
+  font-weight: 900;
+  padding: 1px 15px;
+  z-index: 1;
+}
+
+.alphabetize,
+.z-a,
+.slider-tab-open,
+.go-to-favorites-collection,
+.go-back-to-main-collection,
+.open-data-dropdown-main-collection,
+.open-data-dropdown-fav-collection,
+#scrollUp {
+  border: 1px solid #102d42;
+  box-shadow: 0 0 2px 2px #c5d563, 0 0 4px 6px #85c16b;
+}
+
+
+
+.slider-tab-open {
+  font-size: 1.2rem;
+  padding: 5px 5px;
+  left: 232px;
+}
+
+.tab-slide-function {
+  z-index: 3;
+  transition: 0.6s;
+}
+
+.go-to-favorites-collection,
+.go-back-to-main-collection {
+  position: fixed;
+  top: 96px;
+  left: 10px;
+  background: #4eacc4;
+  font-size: 1.6rem;
+  border-radius: 2px;
+  font-family: "Indie Flower", cursive;
+  font-weight: 900;
+  padding: 1px 15px;
+  z-index: 1;
+}
+
+.go-to-favorites-collection i {
+  position: relative;
+  top: 2px;
+}
+
+.open-data-dropdown-main-collection,
+.open-data-dropdown-fav-collection {
+  position: fixed;
+  top: 166px;
+  left: 10px;
+  background: #4eacc4;
+  font-size: 1.6rem;
+  border-radius: 2px;
+  font-family: "Indie Flower", cursive;
+  font-weight: 900;
+  padding: 1px 15px;
+  z-index: 1;
+}
+
+.z-a {
+  margin-left: 110px;
+}
+
+.main-data,
+.favorite-data {
+  position: fixed;
+  top: 245px;
+  left: 10px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  font-family: "Indie Flower", cursive;
+  line-height: 1;
+}
+
+.data-dropdown-slider-main-collection,
+.data-dropdown-slider-fav-collection {
+  transition: 0.6s;
+  transform: translateY(-180px);
+  opacity: 0;
+}
+
+.translateY-down {
+  transform: none;
+  opacity: 1;
+}
+
+.translateX-left {
+  transform: translateX(-232px) translateY(-180px);
+}
+
+.main-data h4,
+.favorite-data h4 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.3rem;
+  text-decoration: underline;
+}
+
+#scrollUp {
+  background: #4eacc4;
+  font-family: "Indie Flower", cursive;
+  font-weight: 900;
+  color: black;
+  font-size: 24px;
+  font-weight: 900;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  position: fixed;
+  bottom: 0.688rem;
+  right: 30px;
+  text-align: center;
+  border-radius: 16px;
+  cursor: pointer;
+  z-index: 100;
+  padding: 8px 0;
+}
+
+#scrollUp i {
+  position: relative;
+  top: 2px;
+}
