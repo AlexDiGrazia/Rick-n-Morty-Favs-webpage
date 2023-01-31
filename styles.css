@@ -3,7 +3,30 @@ html { scroll-behavior: smooth; }
 body {
   background-color: paleturquoise;
   padding: 0;
+
+}.favorites-collection h3,
+.main-collection h3 {
+  text-align: center;
+  font-size: 30px;
 }
+
+nav.navbar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4%;
+  position: static;
+  z-index: 10;
+}
+
+.navbar img {
+  width: 600px;
+  max-width: 45%;
+}
+
+.logo {
+  margin: auto;  
+}
+
 
 .card-container {
   width: 80vw;
@@ -12,8 +35,6 @@ body {
   justify-content: space-evenly;
   margin: auto;
   grid-gap: 40px;
-  /* position: relative;
-  left: 40px; */
 }
 
 .favorites-collection {
@@ -30,11 +51,7 @@ body {
   overflow-y: scroll;
 }
 
-.favorites-collection h3,
-.main-collection h3 {
-  text-align: center;
-  font-size: 30px;
-}
+
 
 .mortyCards {
   position: relative;
@@ -120,18 +137,7 @@ body {
   border: transparent;
 }
 
-nav.navbar {
-  display: flex;
-  align-items: center;
-  margin-bottom: 4%;
-  position: static;
-  z-index: 10;
-}
 
-.navbar img {
-  width: 600px;
-  max-width: 45%;
-}
 
 .logo-on-favorites-page {
   position: relative;
@@ -139,9 +145,7 @@ nav.navbar {
   top: 8px;
 }
 
-.logo {
-  margin: auto;
-}
+
 
 .alphabetize,
 .z-a,
