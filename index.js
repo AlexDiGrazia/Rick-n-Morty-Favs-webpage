@@ -133,10 +133,12 @@ function loop() {
 
 function goToFavoritesCollection() {
   document.querySelector('.favorites-collection').style.display = 'block';
+  document.getElementById('scrollUp').style.display = 'none';
 }
 
 function returnToMainCollection() {
   document.querySelector('.favorites-collection').style.display = 'none';
+  document.getElementById('scrollUp').style.display = 'block';
 }
 
 
@@ -215,3 +217,8 @@ function sliderTabClose() {
  }
  onScrollHide();
 
+document.getElementById('scrollUp').addEventListener("scroll", (evt) => {
+  if(evt.target.scrollTop > 4) {
+    console.log('yolo')
+  }
+})

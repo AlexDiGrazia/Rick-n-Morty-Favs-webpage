@@ -29,7 +29,7 @@ nav.navbar {
 
 
 .card-container {
-  width: 80vw;
+  width: 74vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -169,7 +169,8 @@ nav.navbar {
 .go-back-to-main-collection,
 .open-data-dropdown-main-collection,
 .open-data-dropdown-fav-collection,
-#scrollUp {
+#scrollUp,
+#scrollUpFavorites {
   border: 1px solid #102d42;
   box-shadow: 0 0 2px 2px #c5d563, 0 0 4px 6px #85c16b;
 }
@@ -259,7 +260,8 @@ nav.navbar {
   text-decoration: underline;
 }
 
-#scrollUp {
+#scrollUp,
+#scrollUpFavorites {
   background: #4eacc4;
   font-family: "Indie Flower", cursive;
   font-weight: 900;
@@ -279,7 +281,12 @@ nav.navbar {
   padding: 8px 0;
 }
 
-#scrollUp i {
+#scrollUp i,
+#scrollUpFavorites i {
   position: relative;
   top: 2px;
+}
+
+.favorites-collection {
+  scroll-behavior: smooth;
 }
