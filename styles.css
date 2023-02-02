@@ -19,8 +19,7 @@ nav.navbar {
   display: flex;
   align-items: center;
   margin-bottom: 4%;
-  position: static;
-  z-index: 10;
+  /* position: static; */
 }
 
 .navbar img {
@@ -31,11 +30,11 @@ nav.navbar {
 
 .logo-on-favorites-page {
   position: relative;
-  top: 8px;
+  top: 0px;
+  right: 8px;
 }
 
 .tab-slide-function {
-  z-index: 300;
   transition: 0.6s;
 }
 
@@ -69,7 +68,7 @@ nav.navbar {
   font-family: "Indie Flower", cursive;
   font-weight: 900;
   padding: 1px 15px;
-  z-index: 1;
+  z-index: 60;
 }
 
 .go-to-favorites-collection,
@@ -91,6 +90,10 @@ nav.navbar {
   transition: 0.6s;
   transform: translateY(-180px);
   opacity: 0;
+  background:#4eacc4;
+  z-index: 5;
+  text-align: center;
+  padding: .5rem 0;
 }
 
 .main-data,
@@ -102,6 +105,7 @@ nav.navbar {
   font-weight: 600;
   font-family: "Indie Flower", cursive;
   line-height: 1;
+  padding: 0 .625rem;
 }
 
 .card-container {
@@ -114,7 +118,6 @@ nav.navbar {
 }
 
 .favorites-collection {
-  position: fixed;
   top: 0px;
   right: 0;
   left: 0;
@@ -122,8 +125,6 @@ nav.navbar {
   background-color: paleturquoise;
   width: 100vw;
   height: 100vh;
-  z-index: 5;
-  /* display: none; */
   overflow-y: scroll;
 }
 
@@ -147,13 +148,13 @@ nav.navbar {
  text-align: center;
 }
 
-.overlay:hover {
+/* .overlay:hover {
   opacity: 1;
-}
+} */
 
-.no-pointer-events {
+/* .no-pointer-events {
   pointer-events: none;
-}
+} */
 
 .overlay h6 {
   margin: 10px 0;
@@ -174,7 +175,7 @@ nav.navbar {
   position: absolute;
   bottom: -7px;
   right: 5px;
-  z-index: 3;
+  z-index: 1;
 }
 
 .go-to-favorites-collection i,
@@ -216,6 +217,7 @@ nav.navbar {
   font-weight: 600;
   margin-bottom: 1.3rem;
   text-decoration: underline;
+  margin-top: 1.125rem
 }
 
 #scrollUp,
@@ -245,5 +247,6 @@ nav.navbar {
   right: 0;
   left: 0;
   background-color:rgba(0, 0, 0, 0.911);
+  z-index: 4;
 }
 

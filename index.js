@@ -129,11 +129,17 @@ function deleteAll() {
 function goToFavoritesCollection() {
   document.querySelector('.favorites-collection').classList.remove('display-none');
   document.getElementById('scrollUp').classList.add('display-none');
+  // Array.from(document.querySelectorAll('.disappear-when-on-favorites-page'))
+  // .forEach((element) => element.classList.add('display-none'))
+  document.querySelector('.main-collection').classList.add('display-none');
 }
 
 function returnToMainCollection() {
   document.querySelector('.favorites-collection').classList.add('display-none');
   document.getElementById('scrollUp').classList.remove('display-none');
+  Array.from(document.querySelectorAll('.disappear-when-on-favorites-page'))
+  .forEach((element) => element.classList.remove('display-none'))
+  document.querySelector('.main-collection').classList.remove('display-none');
 }
 
 function openDataDropDown(id, button) {
@@ -166,13 +172,12 @@ function sliderTabOpen() {
 function mobileSliderTabOpen() {
   sliderTabOpen();
   document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.add('mobile-black-overlay');
-  Array.from(document.querySelectorAll('.overlay'))
-  .forEach((element) => {
-    element.classList.add('no-pointer-events')
-  });
 }
 
 function sliderTabClose() {
+  if(document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.value.includes('mobile-black-overlay')) {
+    document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.remove('mobile-black-overlay');
+  }
   Array.from(document.querySelectorAll('.tab-slide-function'))
   .forEach((button) => button.classList.add("translateX-left"));
   if(document.getElementById('main-data-menu').classList.value.includes('translateY-down')) {
@@ -186,7 +191,9 @@ function sliderTabClose() {
   Array.from(document.querySelectorAll('.slider-tab-open'))
   .forEach((button) => button.innerHTML =`<i class="fa-solid fa-chevron-right"></i>`);
   Array.from(document.querySelectorAll('.slider-tab-open'))
-  .forEach((button) => button.setAttribute("onclick", "sliderTabOpen()"));
+  .forEach((button) => {
+      button.setAttribute("onclick", "mobileSliderTabOpen()")
+  });
  }
 
 function mobileSliderTabClose() {
@@ -225,24 +232,11 @@ function mobileSliderTabClose() {
  }
  onScrollHide();
 
- function reportWindowSize() {
- console.log(window.innerWidth);
-}
+
 
 window.addEventListener('DOMContentLoaded', () => {
   if(window.innerWidth < 1050) {
-    Array.from(document.querySelectorAll('.tab-slide.function').forEach((element) => element.classList.add('translateX-left')))
-    Array.from(document.querySelectorAll('.slider-tab-open'))
-    .forEach((element) => element.setAttribute('onclick', mobileSliderTabOpen()))
-   } else if(window.innerWidth > 1050) {
-    Array.from(document.querySelectorAll('.tab-slide.function').forEach((element) => {
-      if(element.classList.value.includes('translateX-left')){
-        element.classList.remove('translateX-left')
-        }
-      })
-    )  
-    Array.from(document.querySelectorAll('.slider-tab-open'))
-    .forEach((element) => element.setAttribute('onclick', mobileSliderTabClose()))
+    sliderTabClose();
    }
 })
 
@@ -250,8 +244,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 window.addEventListener('resize', () => {
   if(window.innerWidth < 1050) {
-   mobileSliderTabClose();
-  } else if(window.innerWidth > 1050) {
-    sliderTabOpen();
+   sliderTabClose();
   }
 }); 
