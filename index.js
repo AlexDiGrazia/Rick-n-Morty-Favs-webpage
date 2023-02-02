@@ -163,6 +163,15 @@ function sliderTabOpen() {
   .forEach((button) => button.setAttribute("onclick", "sliderTabClose()"));
 }
 
+function mobileSliderTabOpen() {
+  sliderTabOpen();
+  document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.add('mobile-black-overlay');
+  Array.from(document.querySelectorAll('.overlay'))
+  .forEach((element) => {
+    element.classList.add('no-pointer-events')
+  });
+}
+
 function sliderTabClose() {
   Array.from(document.querySelectorAll('.tab-slide-function'))
   .forEach((button) => button.classList.add("translateX-left"));
@@ -179,6 +188,17 @@ function sliderTabClose() {
   Array.from(document.querySelectorAll('.slider-tab-open'))
   .forEach((button) => button.setAttribute("onclick", "sliderTabOpen()"));
  }
+
+function mobileSliderTabClose() {
+  sliderTabClose();
+  if(document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.value.includes('mobile-black-overlay')) {
+    document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.remove('mobile-black-overlay');
+  }
+  Array.from(document.querySelectorAll('.overlay'))
+  .forEach((element) => {
+    element.classList.remove('no-pointer-events')
+  })
+}
 
  document.querySelector('.favorites-collection').addEventListener("scroll", (evt) => {
   if(evt.target.scrollTop > 220) {
@@ -205,4 +225,33 @@ function sliderTabClose() {
  }
  onScrollHide();
 
+ function reportWindowSize() {
+ console.log(window.innerWidth);
+}
 
+window.addEventListener('DOMContentLoaded', () => {
+  if(window.innerWidth < 1050) {
+    Array.from(document.querySelectorAll('.tab-slide.function').forEach((element) => element.classList.add('translateX-left')))
+    Array.from(document.querySelectorAll('.slider-tab-open'))
+    .forEach((element) => element.setAttribute('onclick', mobileSliderTabOpen()))
+   } else if(window.innerWidth > 1050) {
+    Array.from(document.querySelectorAll('.tab-slide.function').forEach((element) => {
+      if(element.classList.value.includes('translateX-left')){
+        element.classList.remove('translateX-left')
+        }
+      })
+    )  
+    Array.from(document.querySelectorAll('.slider-tab-open'))
+    .forEach((element) => element.setAttribute('onclick', mobileSliderTabClose()))
+   }
+})
+
+
+
+window.addEventListener('resize', () => {
+  if(window.innerWidth < 1050) {
+   mobileSliderTabClose();
+  } else if(window.innerWidth > 1050) {
+    sliderTabOpen();
+  }
+}); 
