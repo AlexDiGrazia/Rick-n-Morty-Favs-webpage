@@ -18,27 +18,27 @@ function makeArray(character) {
 
 function makeCard(element, collection, button) {
   const card = document.createElement("div");
-  card.className = "mortyCards";
+  card.className = "mortyCards border";
   card.setAttribute("id", `${element.name}`);
   card.innerHTML = `
     <div class= "image-wrapper">
       <img src=${element.image} alt=${element.name}>
-      <div class="overlay">
+    </div>
+    <h3>${element.name}</h3>
+    <div class="overlay">
         <h6 class="card-stats">Species: ${element.species}</h6>
         <h6 class="card-stats">Origin: ${element.origin.name}</h6>
         <h6 class="card-stats">Status: ${element.status}</h6>
         <button onclick="likeButton()" class="like-button">${button}</button>
       </div>
-    </div>
-    <h3>${element.name}</h3>
   `;
   document.querySelector(collection).appendChild(card);
 }
 
 function likeButton() {
   const parentContainer =
-    event.target.parentElement.parentElement.parentElement.parentElement.parentElement;
-  const cardClicked = event.target.parentElement.parentElement.parentElement.parentElement;
+    event.target.parentElement.parentElement.parentElement.parentElement;
+  const cardClicked = event.target.parentElement.parentElement.parentElement;
   const id = cardClicked.id;
   if (parentContainer.classList.value.includes("main")) {
     switchCollectionsArray(
@@ -48,12 +48,12 @@ function likeButton() {
     ); 
     cardClicked.remove("div");
     document.querySelector(".favorites").appendChild(cardClicked);
-    cardClicked.querySelector('.image-wrapper').querySelector('.overlay').querySelector('.like-button').remove('button');
+    cardClicked.querySelector('.overlay').querySelector('.like-button').remove('button');
     const xOutButton = document.createElement('button');
     xOutButton.setAttribute("onclick", "likeButton()");
     xOutButton.className = "like-button"
     xOutButton.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
-    cardClicked.querySelector('.image-wrapper').querySelector('.overlay').append(xOutButton);
+    cardClicked.querySelector('.overlay').append(xOutButton);
   } else if (parentContainer.classList.value.includes("favorites")) {
     switchCollectionsArray(
       id,
@@ -62,12 +62,12 @@ function likeButton() {
     );
     cardClicked.remove("div");
     document.querySelector(".main").appendChild(cardClicked);
-    cardClicked.querySelector('.image-wrapper').querySelector('.overlay').querySelector('.like-button').remove('button');
+    cardClicked.querySelector('.overlay').querySelector('.like-button').remove('button');
     const heartButton = document.createElement('button');
     heartButton.setAttribute("onclick", "likeButton()");
     heartButton.className = "like-button"
     heartButton.innerHTML = `<span>♡</span>`;
-    cardClicked.querySelector('.image-wrapper').querySelector('.overlay').append(heartButton);
+    cardClicked.querySelector('.overlay').append(heartButton);
   }
   displayDataFunction();
 }
