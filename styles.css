@@ -20,7 +20,6 @@ nav.navbar {
   display: flex;
   align-items: center;
   margin-bottom: 4%;
-  /* position: static; */
 }
 
 .navbar img {
@@ -44,10 +43,17 @@ nav.navbar {
   box-shadow: 0 0 2px 2px #c5d563, 0 0 4px 6px #85c16b;
 }
 
+.position-fixed {
+  position: fixed;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
 .alphabetize,
 .z-a,
 .slider-tab-open {
-  position: fixed;
   top: 30px;
   left: 10px;
 }
@@ -75,14 +81,12 @@ nav.navbar {
 
 .go-to-favorites-collection,
 .go-back-to-main-collection {
-  position: fixed;
   top: 96px;
   left: 10px;
 }
 
 .open-data-dropdown-main-collection,
 .open-data-dropdown-fav-collection {
-  position: fixed;
   top: 166px;
   left: 10px;
 }
@@ -100,7 +104,6 @@ nav.navbar {
 
 .main-data,
 .favorite-data {
-  position: fixed;
   top: 245px;
   left: 10px;
   font-size: 1.3rem;
@@ -149,14 +152,6 @@ nav.navbar {
 .overlay {
  text-align: center;
 }
-
-/* .overlay:hover {
-  opacity: 1;
-} */
-
-/* .no-pointer-events {
-  pointer-events: none;
-} */
 
 .overlay h6 {
   margin: 10px 0;

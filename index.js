@@ -135,8 +135,6 @@ function goToFavoritesCollection() {
 function returnToMainCollection() {
   document.querySelector('.favorites-collection').classList.add('display-none');
   document.getElementById('scrollUp').classList.remove('display-none');
-  Array.from(document.querySelectorAll('.disappear-when-on-favorites-page'))
-  .forEach((element) => element.classList.remove('display-none'))
   document.querySelector('.main-collection').classList.remove('display-none');
 }
 

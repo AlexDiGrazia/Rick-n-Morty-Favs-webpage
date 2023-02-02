@@ -20,15 +20,15 @@
   <section class="main-collection" id="pageTop">
     <nav class="navbar">
       <img src="ricknmorty.png" width="200" alt="list rick and morty episodes wikipedia" /></img>
-        <button onclick="sliderTabClose()" class="tab-slide-function border slider-tab-open button-styles disappear-when-on-favorites-page"><i class="fa-solid fa-chevron-left"></i></button>
-        <button onclick="alphabetize()" class="tab-slide-function border alphabetize button-styles disappear-when-on-favorites-page" id="alphabetize-main">A - Z</button>
-        <button onclick="zThroughA()" class="tab-slide-function border z-a button-styles disappear-when-on-favorites-page" id="z-a-main">Z - A</button>
-        <button onclick="goToFavoritesCollection()" class="tab-slide-function border go-to-favorites-collection button-styles disappear-when-on-favorites-page">Favorites <i class="fa-solid fa-arrow-right"></i></button>
-        <button onclick="openDataDropDown('main-data-menu', 'main-data-dropdown')" class="tab-slide-function border open-data-dropdown-main-collection button-styles disappear-when-on-favorites-page" id="main-data-dropdown">See Data</button>
+        <button onclick="sliderTabClose()" class="tab-slide-function border slider-tab-open button-styles position-fixed"><i class="fa-solid fa-chevron-left"></i></button>
+        <button onclick="alphabetize()" class="tab-slide-function border alphabetize button-styles position-fixed" id="alphabetize-main">A - Z</button>
+        <button onclick="zThroughA()" class="tab-slide-function border z-a button-styles position-fixed" id="z-a-main">Z - A</button>
+        <button onclick="goToFavoritesCollection()" class="tab-slide-function border go-to-favorites-collection button-styles position-fixed">Favorites <i class="fa-solid fa-arrow-right"></i></button>
+        <button onclick="openDataDropDown('main-data-menu', 'main-data-dropdown')" class="tab-slide-function border open-data-dropdown-main-collection button-styles position-fixed" id="main-data-dropdown">See Data</button>
     </nav>
     <h3>Main Collection</h3>
-    <div id="main-data-menu" class="data-dropdown-slider-main-collection border main-data disappear-when-on-favorites-page">
-      
+    <div id="main-data-menu" class="data-dropdown-slider-main-collection border main-data position-fixed data-fixed-position">
+       .top-row-buttons-fixed-position
     </div>
     <div class="main card-container">
     
@@ -38,14 +38,14 @@
   <section class="favorites-collection display-none" >
     <nav class="navbar">
       <img class="logo-on-favorites-page" src="ricknmorty.png" width="200" alt="list rick and morty episodes wikipedia" /></img>
-      <button onclick="sliderTabClose()" class="tab-slide-function border slider-tab-open button-styles"><i class="fa-solid fa-chevron-left"></i></button>
-      <button onclick="alphabetize()" class="tab-slide-function border alphabetize button-styles" id="alphabetize-fav">A - Z</button>
-      <button onclick="zThroughA()" class="tab-slide-function border z-a button-styles" id="z-a-main">Z - A</button>
-      <button onclick="returnToMainCollection()" class="tab-slide-function border go-back-to-main-collection button-styles"><i class="fa-solid fa-arrow-left"></i> Main</button>
-      <button onclick="openDataDropDown('fav-data-menu', 'fav-data-dropdown')" class="tab-slide-function border open-data-dropdown-fav-collection button-styles" id="fav-data-dropdown">See Data</button>
+      <button onclick="sliderTabClose()" class="tab-slide-function border slider-tab-open button-styles position-fixed"><i class="fa-solid fa-chevron-left"></i></button>
+      <button onclick="alphabetize()" class="tab-slide-function border alphabetize button-styles position-fixed" id="alphabetize-fav">A - Z</button>
+      <button onclick="zThroughA()" class="tab-slide-function border z-a button-styles position-fixed" id="z-a-main">Z - A</button>
+      <button onclick="returnToMainCollection()" class="tab-slide-function border go-back-to-main-collection button-styles position-fixed"><i class="fa-solid fa-arrow-left"></i> Main</button>
+      <button onclick="openDataDropDown('fav-data-menu', 'fav-data-dropdown')" class="tab-slide-function border open-data-dropdown-fav-collection button-styles position-fixed" id="fav-data-dropdown">See Data</button>
     </nav>
     <h3>Favorites Collection</h3>
-    <div id="fav-data-menu" class="data-dropdown-slider-fav-collection border favorite-data"></div>
+    <div id="fav-data-menu" class="data-dropdown-slider-fav-collection border favorite-data position-fixed data-fixed-position"></div>
     <div id="pageTopFavorites" class="favorites card-container">
       <a id="scrollUpFavorites" class="border button-styles" href="#pageTopFavorites">
         <i class="fa-solid fa-arrow-up-long"></i>
