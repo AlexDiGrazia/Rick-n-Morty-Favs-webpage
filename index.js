@@ -129,8 +129,6 @@ function deleteAll() {
 function goToFavoritesCollection() {
   document.querySelector('.favorites-collection').classList.remove('display-none');
   document.getElementById('scrollUp').classList.add('display-none');
-  // Array.from(document.querySelectorAll('.disappear-when-on-favorites-page'))
-  // .forEach((element) => element.classList.add('display-none'))
   document.querySelector('.main-collection').classList.add('display-none');
 }
 
@@ -222,7 +220,7 @@ function mobileSliderTabClose() {
   window.onscroll = function() {
    if(window.pageYOffset > 220) {
     sliderTabClose();
-   } else {
+   } else if(window.pageYOffset < 220 && window.innerWidth > 1050) {
     Array.from(document.querySelectorAll('.tab-slide-function'))
   .forEach((button) => button.classList.remove('translateX-left'));
   document.querySelector('.slider-tab-open').innerHTML = `<i class="fa-solid fa-chevron-left"></i>`;
@@ -232,15 +230,11 @@ function mobileSliderTabClose() {
  }
  onScrollHide();
 
-
-
 window.addEventListener('DOMContentLoaded', () => {
   if(window.innerWidth < 1050) {
     sliderTabClose();
    }
 })
-
-
 
 window.addEventListener('resize', () => {
   if(window.innerWidth < 1050) {
