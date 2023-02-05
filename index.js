@@ -36,9 +36,8 @@ function makeCard(element, collection, button) {
 }
 
 function likeButton() {
-  const parentContainer =
-    event.target.parentElement.parentElement.parentElement.parentElement;
   const cardClicked = event.target.parentElement.parentElement.parentElement;
+  const parentContainer = cardClicked.parentElement;
   const id = cardClicked.id;
   if (parentContainer.classList.value.includes("main")) {
     switchCollectionsArray(
