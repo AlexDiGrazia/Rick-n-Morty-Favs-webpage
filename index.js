@@ -37,13 +37,13 @@ const checkIfArrayIncludes = (array, value) => {
   return array.includes(value);
 }
 
-function likeButton(event) {
+function likeButton() {
   const cardClicked = event.target.parentElement.parentElement.parentElement;
   const parentContainer = cardClicked.parentElement;
   const id = cardClicked.id;
 
-  const conditionOne = checkIfArrayIncludes(parentContainer.classList.value, '.main');
-  const conditionTwo = checkIfArrayIncludes(parentContainer.classList.value, '.favorites');
+  const conditionOne = checkIfArrayIncludes(parentContainer.classList.value, 'main');
+  const conditionTwo = checkIfArrayIncludes(parentContainer.classList.value, 'favorites');
   const paramsOne = conditionOne
   ? [array, favoritesArray, ".favorites", `<i class="fa-solid fa-xmark"></i>`]
   : [favoritesArray, array, ".main", `<span>♡</span>`]
