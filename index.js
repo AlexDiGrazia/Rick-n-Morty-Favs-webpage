@@ -8,13 +8,11 @@ let favoritesData = [];
 
 rick
   .then((data) => data.json())
-  .then((data) => data.forEach((element) => makeArray(element)))
-  .then((data) => array.forEach((person) => makeCard(person, ".main", '<span>♡</span>')))
-  .then((data) => displayDataFunction());
-
-function makeArray(character) {
-  array.push(character);
-}
+  .then((data) => {
+    array = data;
+    array.forEach((person) => makeCard(person, ".main", '<span>♡</span>'));
+    displayDataFunction()
+  })
 
 function makeCard(element, collection, button) {
   const card = document.createElement("div");
@@ -35,38 +33,35 @@ function makeCard(element, collection, button) {
   document.querySelector(collection).appendChild(card);
 }
 
-function likeButton() {
+const checkIfArrayIncludes = (array, value) => {
+  return array.includes(value);
+}
+
+function likeButton(event) {
   const cardClicked = event.target.parentElement.parentElement.parentElement;
   const parentContainer = cardClicked.parentElement;
   const id = cardClicked.id;
-  if (parentContainer.classList.value.includes("main")) {
+
+  const conditionOne = checkIfArrayIncludes(parentContainer.classList.value, '.main');
+  const conditionTwo = checkIfArrayIncludes(parentContainer.classList.value, '.favorites');
+  const paramsOne = conditionOne
+  ? [array, favoritesArray, ".favorites", `<i class="fa-solid fa-xmark"></i>`]
+  : [favoritesArray, array, ".main", `<span>♡</span>`]
+
+  if(conditionOne || conditionTwo) {
     switchCollectionsArray(
       id,
-      array,
-      favoritesArray
+      paramsOne[0],
+      paramsOne[1]
     ); 
     cardClicked.remove("div");
-    document.querySelector(".favorites").appendChild(cardClicked);
+    document.querySelector(paramsOne[2]).appendChild(cardClicked);
     cardClicked.querySelector('.overlay').querySelector('.like-button').remove('button');
-    const xOutButton = document.createElement('button');
-    xOutButton.setAttribute("onclick", "likeButton()");
-    xOutButton.className = "like-button"
-    xOutButton.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
-    cardClicked.querySelector('.overlay').append(xOutButton);
-  } else if (parentContainer.classList.value.includes("favorites")) {
-    switchCollectionsArray(
-      id,
-      favoritesArray,
-      array
-    );
-    cardClicked.remove("div");
-    document.querySelector(".main").appendChild(cardClicked);
-    cardClicked.querySelector('.overlay').querySelector('.like-button').remove('button');
-    const heartButton = document.createElement('button');
-    heartButton.setAttribute("onclick", "likeButton()");
-    heartButton.className = "like-button"
-    heartButton.innerHTML = `<span>♡</span>`;
-    cardClicked.querySelector('.overlay').append(heartButton);
+    const newButton = document.createElement('button');
+    newButton.setAttribute("onclick", "likeButton()");
+    newButton.className = "like-button"
+    newButton.innerHTML = paramsOne[3];
+    cardClicked.querySelector('.overlay').append(newButton);
   }
   displayDataFunction();
 }
@@ -90,8 +85,6 @@ function displayDataFunction() {
   
   for(let value of dataValueArrays) {
     appendCharacterDataToDropDownMenu(...value, array, '.main-data');
-  }
-  for(let value of dataValueArrays) {
     appendCharacterDataToDropDownMenu(...value, favoritesArray, '.favorite-data')
   }
 }
@@ -101,21 +94,14 @@ function appendCharacterDataToDropDownMenu(key, value, message, whichArray, appe
   document.querySelector(appendWhere).innerHTML += `${message}: ${thisNumber.length}<br><br>`;
 }
 
-function alphabetize() {
-  array.sort((a, b) => (a.name > b.name ? 1 : -1));
-  favoritesArray.sort((a, b) => (a.name > b.name ? 1 : -1));
+function sortAnyWay(way) { // asc, desc 
+  array.sort((a, b) => (a.name > b.name ? way === 'asc' ? 1 : -1 : way === 'asc' ? -1 : 1));
+  favoritesArray.sort((a, b) => (a.name > b.name ? way === 'asc' ? 1 : -1 : way === 'asc' ? -1 : 1));
   deleteAll();
   array.forEach((person) => makeCard(person, ".main", '<span>♡</span>'));
   favoritesArray.forEach((person) => makeCard(person, ".favorites", `<i class="fa-solid fa-xmark"></i>`));
 }
 
-function zThroughA() {
-  array.sort((a, b) => (a.name < b.name ? 1 : -1));
-  favoritesArray.sort((a, b) => (a.name < b.name ? 1 : -1));
-  deleteAll();
-  array.forEach((person) => makeCard(person, ".main", '<span>♡</span>'));
-  favoritesArray.forEach((person) => makeCard(person, ".favorites", `<i class="fa-solid fa-xmark"></i>`));
-}
 
 function deleteAll() {
   document.querySelector(".main").innerHTML = "";
@@ -125,17 +111,28 @@ function deleteAll() {
   </a> `;
 }
 
-function goToFavoritesCollection() {
-  document.querySelector('.favorites-collection').classList.remove('display-none');
-  document.getElementById('scrollUp').classList.add('display-none');
-  document.querySelector('.main-collection').classList.add('display-none');
+function addRemoveClass(action, container, className) {
+  if(action === 'remove') {
+    container.remove(className);
+  } else {
+    container.add(className)
+  }
 }
 
-function returnToMainCollection() {
-  document.querySelector('.favorites-collection').classList.add('display-none');
-  document.getElementById('scrollUp').classList.remove('display-none');
-  document.querySelector('.main-collection').classList.remove('display-none');
+function goToCollection(type) {
+  const container1 = document.querySelector('.favorites-collection').classList;
+  const container2 = document.getElementById('scrollUp').classList;
+  const container3 = document.querySelector('.main-collection').classList;
+
+  const params = type === 'favorites'
+    ? ['remove', 'add', 'add']
+    : ['add', 'remove', 'remove'];
+
+    [container1, container2, container3].map((container, index) => {
+      addRemoveClass(params[index], container, 'display-none')
+    })
 }
+
 
 function openDataDropDown(id, button) {
   document.getElementById(id).classList.add('translateY-down');
@@ -227,14 +224,14 @@ function mobileSliderTabClose() {
  }
  onScrollHide();
 
-window.addEventListener('DOMContentLoaded', () => {
-  if(window.innerWidth < 1050) {
-    sliderTabClose();
-   }
-})
+ function addWidthListener(event) {
+  window.addEventListener(event, () => {
+    if(window.innerWidth < 1050) {
+      sliderTabClose();
+     }
+  })
+ }
 
-window.addEventListener('resize', () => {
-  if(window.innerWidth < 1050) {
-   sliderTabClose();
-  }
-}); 
+ ['DOMContentLoaded', 'resize'].forEach((item) => addWidthListener(item))
+
+
