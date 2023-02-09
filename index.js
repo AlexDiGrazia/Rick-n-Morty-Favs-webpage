@@ -95,10 +95,17 @@ function appendCharacterDataToDropDownMenu(key, value, message, whichArray, appe
 }
 
 function sortAnyWay(way) { // asc, desc 
-  array.sort((a, b) => (a.name > b.name ? way === 'asc' ? 1 : -1 : way === 'asc' ? -1 : 1));
-  favoritesArray.sort((a, b) => (a.name > b.name ? way === 'asc' ? 1 : -1 : way === 'asc' ? -1 : 1));
+  [array, favoritesArray].forEach((collection) => {
+    collection.sort((a, b) => {
+      if (a.name > b.name) {
+        return way === 'asc' ? 1 : -1;
+      } else {
+        return way === 'asc' ? -1 : 1;
+      }
+    });  
+  });
   deleteAll();
-  array.forEach((person) => makeCard(person, ".main", '<span>♡</span>'));
+  array.forEach((person)  => makeCard(person, ".main", '<span>♡</span>'));
   favoritesArray.forEach((person) => makeCard(person, ".favorites", `<i class="fa-solid fa-xmark"></i>`));
 }
 
@@ -111,39 +118,44 @@ function deleteAll() {
   </a> `;
 }
 
-function addRemoveClass(action, container, className) {
+function addRemoveClass(action, classlist, className) {
   if(action === 'remove') {
-    container.remove(className);
+    classlist.remove(className);
   } else {
-    container.add(className)
+    classlist.add(className)
   }
 }
 
 function goToCollection(type) {
-  const container1 = document.querySelector('.favorites-collection').classList;
-  const container2 = document.getElementById('scrollUp').classList;
-  const container3 = document.querySelector('.main-collection').classList;
+  const classlist1 = document.querySelector('.favorites-collection').classList;
+  const classlist2 = document.getElementById('scrollUp').classList;
+  const classlist3 = document.querySelector('.main-collection').classList;
 
   const params = type === 'favorites'
     ? ['remove', 'add', 'add']
     : ['add', 'remove', 'remove'];
 
-    [container1, container2, container3].map((container, index) => {
-      addRemoveClass(params[index], container, 'display-none')
+    [classlist1, classlist2, classlist3].map((classlist, index) => {
+      addRemoveClass(params[index], classlist, 'display-none')
     })
 }
 
 
-function openDataDropDown(id, button) {
-  document.getElementById(id).classList.add('translateY-down');
-  document.getElementById(button).innerHTML = "Close Data";
-  document.getElementById(button).setAttribute("onclick", `closeDataDropDown('${id}', '${button}')`);
-}
 
-function closeDataDropDown(id, button) {
-  document.getElementById(id).classList.remove('translateY-down');
-  document.getElementById(button).innerHTML = "See Data";
-  document.getElementById(button).setAttribute("onclick", `openDataDropDown('${id}', '${button}')`);
+
+
+function dataDropDownOpenClose(id, button) { 
+  const dataDropDownClassList = document.getElementById(id).classList;
+  const buttonIsClosedTrueOrFalse = document.getElementById(button).innerHTML === "See Data"
+    ? true
+    : false;
+
+  const dataMenuParameters = buttonIsClosedTrueOrFalse
+    ? ['add', "Close Data"]
+    : ['remove', "See Data"];
+
+  addRemoveClass(dataMenuParameters[0], dataDropDownClassList, 'translateY-down')
+  document.getElementById(button).innerHTML = dataMenuParameters[1];
 }
 
 function sliderTabOpen() {
