@@ -20,7 +20,7 @@
   <section class="main-collection" id="pageTop">
     <nav class="navbar">
       <img src="ricknmorty.png" width="200" alt="list rick and morty episodes wikipedia" /></img>
-        <button onclick="sliderTabClose()" class="tab-slide-function border slider-tab-open button-styles position-fixed"><i class="fa-solid fa-chevron-left"></i></button>
+        <button onclick="sliderTabOpenClose()" class="tab-slide-function border slider-tab-open button-styles position-fixed"><i class="fa-solid fa-chevron-left"></i></button>
         <button onclick="sortAnyWay('asc')" class="tab-slide-function border alphabetize button-styles position-fixed" id="alphabetize-main">A - Z</button>
         <button onclick="sortAnyWay('desc')" class="tab-slide-function border z-a button-styles position-fixed" id="z-a-main">Z - A</button>
         <button onclick="goToCollection('favorites')" class="tab-slide-function border go-to-favorites-collection button-styles position-fixed">Favorites <i class="fa-solid fa-arrow-right"></i></button>
@@ -28,7 +28,6 @@
     </nav>
     <h3>Main Collection</h3>
     <div id="main-data-menu" class="data-dropdown-slider-main-collection border main-data position-fixed data-fixed-position">
-       .top-row-buttons-fixed-position
     </div>
     <div class="main card-container">
     
@@ -38,7 +37,7 @@
   <section class="favorites-collection display-none" >
     <nav class="navbar">
       <img class="logo-on-favorites-page" src="ricknmorty.png" width="200" alt="list rick and morty episodes wikipedia" /></img>
-      <button onclick="sliderTabClose()" class="tab-slide-function border slider-tab-open button-styles position-fixed"><i class="fa-solid fa-chevron-left"></i></button>
+      <button onclick="sliderTabOpenClose()" class="tab-slide-function border slider-tab-open button-styles position-fixed"><i class="fa-solid fa-chevron-left"></i></button>
       <button onclick="sortAnyWay('asc')" class="tab-slide-function border alphabetize button-styles position-fixed" id="alphabetize-fav">A - Z</button>
       <button onclick="sortAnyWay('desc')" class="tab-slide-function border z-a button-styles position-fixed" id="z-a-main">Z - A</button>
       <button onclick="goToCollection('main')" class="tab-slide-function border go-back-to-main-collection button-styles position-fixed"><i class="fa-solid fa-arrow-left"></i> Main</button>

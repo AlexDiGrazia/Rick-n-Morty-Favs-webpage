@@ -109,7 +109,6 @@ function sortAnyWay(way) { // asc, desc
   favoritesArray.forEach((person) => makeCard(person, ".favorites", `<i class="fa-solid fa-xmark"></i>`));
 }
 
-
 function deleteAll() {
   document.querySelector(".main").innerHTML = "";
   document.querySelector(".favorites").innerHTML = `
@@ -140,10 +139,6 @@ function goToCollection(type) {
     })
 }
 
-
-
-
-
 function dataDropDownOpenClose(id, button) { 
   const dataDropDownClassList = document.getElementById(id).classList;
   const buttonIsClosedTrueOrFalse = document.getElementById(button).innerHTML === "See Data"
@@ -158,79 +153,166 @@ function dataDropDownOpenClose(id, button) {
   document.getElementById(button).innerHTML = dataMenuParameters[1];
 }
 
-function sliderTabOpen() {
-  if(document.querySelector('.data-dropdown-slider-main-collection').classList.value.includes('translateX-left-and-up')) {
-    document.querySelector('.data-dropdown-slider-main-collection').classList.remove('translateX-left-and-up');
-  }
-  if(document.querySelector('.data-dropdown-slider-fav-collection').classList.value.includes('translateX-left-and-up')) {
-    document.querySelector('.data-dropdown-slider-fav-collection').classList.remove('translateX-left-and-up');
-  }
- Array.from(document.querySelectorAll('.tab-slide-function'))
- .forEach((button) => button.classList.remove("translateX-left"));
- Array.from(document.querySelectorAll('.slider-tab-open'))
-  .forEach((button) => button.innerHTML =`<i class="fa-solid fa-chevron-left"></i>`);
-  Array.from(document.querySelectorAll('.slider-tab-open'))
-  .forEach((button) => button.setAttribute("onclick", "sliderTabClose()"));
-}
+// function addRemoveClass(action, classlist, className) {
+//   if(action === 'remove') {
+//     classlist.remove(className);
+//   } else {
+//     classlist.add(className)
+//   }
+// }
 
-function mobileSliderTabOpen() {
-  sliderTabOpen();
-  document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.add('mobile-black-overlay');
-}
+// const checkIfArrayIncludes = (array, value) => {
+//   return array.includes(value);
+// }
 
-function sliderTabClose() {
-  if(document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.value.includes('mobile-black-overlay')) {
-    document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.remove('mobile-black-overlay');
+function sliderTabOpenClose() {
+  ['.data-dropdown-slider-main-collection', '.data-dropdown-slider-fav-collection']  // pre-moves menu to correct position for open
+  .forEach((menu) => {
+      const menuClassList = document.querySelector(menu).classList.value;
+      const condition = checkIfArrayIncludes(menuClassList, 'translateX-left-and-up');
+      if (condition) {
+        addRemoveClass('remove', menuClassList, 'translateX-left-and-up' ) // 'remove' should always equal 'remove' cause only one set of arguments applied
+      }
+    })
+
+  const mobileOverlayClassList = document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.value; // removes black overlay if present
+  const overlayCondition = checkIfArrayIncludes(mobileOverlayClassList, 'mobile-black-overlay');
+  if (overlayCondition) {
+    addRemoveClass('remove', mobileOverlayClassList, 'mobile-black-overlay')
   }
-  Array.from(document.querySelectorAll('.tab-slide-function'))
-  .forEach((button) => button.classList.add("translateX-left"));
-  if(document.getElementById('main-data-menu').classList.value.includes('translateY-down')) {
-    closeDataDropDown('main-data-menu', 'main-data-dropdown')
-    document.getElementById('main-data-menu').classList.add('translateX-left-and-up');
-  }
-  if(document.getElementById('fav-data-menu').classList.value.includes('translateY-down')) {
-    closeDataDropDown('fav-data-menu', 'fav-data-dropdown')
-    document.getElementById('fav-data-menu').classList.add('translateX-left-and-up');
-  }
-  Array.from(document.querySelectorAll('.slider-tab-open'))
-  .forEach((button) => button.innerHTML =`<i class="fa-solid fa-chevron-right"></i>`);
-  Array.from(document.querySelectorAll('.slider-tab-open'))
+
+  Array.from(document.querySelectorAll('.tab-slide-function'))        //left and right
   .forEach((button) => {
-      button.setAttribute("onclick", "mobileSliderTabOpen()")
-  });
- }
-
-function mobileSliderTabClose() {
-  sliderTabClose();
-  if(document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.value.includes('mobile-black-overlay')) {
-    document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.remove('mobile-black-overlay');
-  }
-  Array.from(document.querySelectorAll('.overlay'))
-  .forEach((element) => {
-    element.classList.remove('no-pointer-events')
+    const buttonClassList = button.classList;
+    const buttonParams = buttonClassList.value.includes('translateX-left')
+      ? 'remove'
+      : 'add';
+    addRemoveClass(buttonParams,buttonClassList, 'translateX-left')
   })
+
+  ['main-data-menu', 'fav-data-menu'].forEach((dataMenu) => {
+    const dataMenuId = document.GetElementById(dataMenu);
+    const dataMenuClassList = dataMenuId.classList.value;
+    const dataMenuCondition = checkIfArrayIncludes(dataMenuClassList, 'translateY-down');
+    const buttonArgs = dataMenu === 'main-data-menu'
+      ? 'main-data-dropdown'
+      : 'fav-data-menu'
+    if (dataMenuCondition) {
+      dataDropDownOpenClose(dataMenu, buttonArgs)
+      addRemoveClass('add', dataMenuId.classList, 'translateX-left-and-up')
+    }
+  })
+
+  const tabButtonsArray = Array.from(document.querySelectorAll('.slider-tab-open'));
+  const arrowButton = event.target === document.querySelector('.fa-chevron-right')
+    ? [`<i class="fa-solid fa-chevron-left"></i>`]
+    : [`<i class="fa-solid fa-chevron-right"></i>`];
+  tabButtonsArray.forEach((button) => button.innerHTML = arrowButton);
+
+  // const whichFunction = event.target === document.querySelector('.fa-chevron-right') 
+  //   ? "sliderTabClose()"
+  //   : "mobileSliderTabOpen()"
+  // tabButtonsArray.forEach((button) => button.setAttribute("onclick", whichFunction));
 }
+
+
+
+
+// function sliderTabOpen() {
+  // if(document.querySelector('.data-dropdown-slider-main-collection').classList.value.includes('translateX-left-and-up')) {
+  //   document.querySelector('.data-dropdown-slider-main-collection').classList.remove('translateX-left-and-up');
+  // }
+  // if(document.querySelector('.data-dropdown-slider-fav-collection').classList.value.includes('translateX-left-and-up')) {
+  //   document.querySelector('.data-dropdown-slider-fav-collection').classList.remove('translateX-left-and-up');
+  // }
+//  Array.from(document.querySelectorAll('.tab-slide-function'))
+//  .forEach((button) => button.classList.remove("translateX-left"));
+//  Array.from(document.querySelectorAll('.slider-tab-open'))
+//   .forEach((button) => button.innerHTML =`<i class="fa-solid fa-chevron-left"></i>`);
+//   Array.from(document.querySelectorAll('.slider-tab-open'))
+//   .forEach((button) => button.setAttribute("onclick", "sliderTabClose()"));
+// }
+
+// function sliderTabClose() {
+  // if(document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.value.includes('mobile-black-overlay')) {
+  //   document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.remove('mobile-black-overlay');
+  // }
+  // Array.from(document.querySelectorAll('.tab-slide-function'))
+  // .forEach((button) => button.classList.add("translateX-left"));
+  // if(document.getElementById('main-data-menu').classList.value.includes('translateY-down')) {
+  //   closeDataDropDown('main-data-menu', 'main-data-dropdown')
+  //   document.getElementById('main-data-menu').classList.add('translateX-left-and-up');
+  // }
+  // if(document.getElementById('fav-data-menu').classList.value.includes('translateY-down')) {
+  //   closeDataDropDown('fav-data-menu', 'fav-data-dropdown')
+  //   document.getElementById('fav-data-menu').classList.add('translateX-left-and-up');
+  // }
+  // Array.from(document.querySelectorAll('.slider-tab-open'))
+  // .forEach((button) => button.innerHTML =`<i class="fa-solid fa-chevron-right"></i>`);
+
+//   Array.from(document.querySelectorAll('.slider-tab-open'))
+//   .forEach((button) => button.setAttribute("onclick", "mobileSliderTabOpen()"));
+//  }
+
+
+//  function mobileSliderTabOpen() {
+//   sliderTabOpen();
+//   document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.add('mobile-black-overlay');
+// }
+
+
+// function mobileSliderTabClose() {
+//   sliderTabClose();
+//   if(document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.value.includes('mobile-black-overlay')) {
+//     document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.remove('mobile-black-overlay');
+//   }
+//   Array.from(document.querySelectorAll('.overlay'))
+//   .forEach((element) => {
+//     element.classList.remove('no-pointer-events')
+//   })
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  document.querySelector('.favorites-collection').addEventListener("scroll", (evt) => {
   if(evt.target.scrollTop > 220) {
-      sliderTabClose();
+      sliderTabOpenClose();
    } else {
     Array.from(document.querySelectorAll('.tab-slide-function'))
   .forEach((button) => button.classList.remove('translateX-left'));
   document.querySelector('.slider-tab-open').innerHTML = `<i class="fa-solid fa-chevron-left"></i>`;
-  sliderTabOpen();
+  sliderTabOpenClose();
    }
   })
  
  function onScrollHide() {
   window.onscroll = function() {
    if(window.pageYOffset > 220) {
-    sliderTabClose();
+    sliderTabOpenClose();
    } else if(window.pageYOffset < 220 && window.innerWidth > 1050) {
     Array.from(document.querySelectorAll('.tab-slide-function'))
   .forEach((button) => button.classList.remove('translateX-left'));
   document.querySelector('.slider-tab-open').innerHTML = `<i class="fa-solid fa-chevron-left"></i>`;
-  sliderTabOpen();
+  sliderTabOpenClose();
    }
   }
  }
@@ -239,7 +321,7 @@ function mobileSliderTabClose() {
  function addWidthListener(event) {
   window.addEventListener(event, () => {
     if(window.innerWidth < 1050) {
-      sliderTabClose();
+      sliderTabOpenClose();
      }
   })
  }
