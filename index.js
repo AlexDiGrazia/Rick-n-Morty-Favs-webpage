@@ -168,12 +168,16 @@ function dataDropDownOpenClose(id, button) {
 function sliderTabOpenClose() {
   ['.data-dropdown-slider-main-collection', '.data-dropdown-slider-fav-collection']  // pre-moves menu to correct position for open
   .forEach((menu) => {
-      const menuClassList = document.querySelector(menu).classList.value;
-      const condition = checkIfArrayIncludes(menuClassList, 'translateX-left-and-up');
+    // console.log(menu)
+      const menuClassList = document.querySelector(menu).classList
+      const menuClassListValues = menuClassList.value;
+      // console.log(menuClassListValues)
+      const condition = checkIfArrayIncludes(menuClassListValues, 'translateX-left-and-up');
+      // console.log(condition);
       if (condition) {
         addRemoveClass('remove', menuClassList, 'translateX-left-and-up' ) // 'remove' should always equal 'remove' cause only one set of arguments applied
       }
-    })
+    })  /* last bug update here */
 
   const mobileOverlayClassList = document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.value; // removes black overlay if present
   const overlayCondition = checkIfArrayIncludes(mobileOverlayClassList, 'mobile-black-overlay');
@@ -187,11 +191,15 @@ function sliderTabOpenClose() {
     const buttonParams = buttonClassList.value.includes('translateX-left')
       ? 'remove'
       : 'add';
-    addRemoveClass(buttonParams,buttonClassList, 'translateX-left')
+    addRemoveClass(buttonParams, buttonClassList, 'translateX-left')
   })
 
-  ['main-data-menu', 'fav-data-menu'].forEach((dataMenu) => {
-    const dataMenuId = document.GetElementById(dataMenu);
+  const menusArray = ['main-data-menu', 'fav-data-menu'];
+
+  menusArray.forEach((dataMenu) => {
+    // console.log(dataMenu)
+    const dataMenuId = document.getElementById(dataMenu);
+    // console.log(dataMenuId)
     const dataMenuClassList = dataMenuId.classList.value;
     const dataMenuCondition = checkIfArrayIncludes(dataMenuClassList, 'translateY-down');
     const buttonArgs = dataMenu === 'main-data-menu'
@@ -205,10 +213,11 @@ function sliderTabOpenClose() {
 
   const tabButtonsArray = Array.from(document.querySelectorAll('.slider-tab-open'));
   const arrowButton = event.target === document.querySelector('.fa-chevron-right')
-    ? [`<i class="fa-solid fa-chevron-left"></i>`]
-    : [`<i class="fa-solid fa-chevron-right"></i>`];
+  ? [`<i class="fa-solid fa-chevron-left"></i>`]
+  : [`<i class="fa-solid fa-chevron-right"></i>`];
+  console.log(arrowButton)
   tabButtonsArray.forEach((button) => button.innerHTML = arrowButton);
-
+  
   // const whichFunction = event.target === document.querySelector('.fa-chevron-right') 
   //   ? "sliderTabClose()"
   //   : "mobileSliderTabOpen()"
