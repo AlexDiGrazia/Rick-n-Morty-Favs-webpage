@@ -153,156 +153,50 @@ function dataDropDownOpenClose(id, button) {
   document.getElementById(button).innerHTML = dataMenuParameters[1];
 }
 
-// function addRemoveClass(action, classlist, className) {
-//   if(action === 'remove') {
-//     classlist.remove(className);
-//   } else {
-//     classlist.add(className)
-//   }
-// }
+function sliderTabOpenClose(id, button) {
+  const dataMenuId = document.getElementById(id);                  // positions menu into position for open if it has been previous closed by slider-tab
+  const dataMenuClassList = dataMenuId.classList.value;
+  const preOpenCondition = checkIfArrayIncludes(dataMenuClassList, 'translateX-left-and-up');
+  if (preOpenCondition) {
+    addRemoveClass('remove', dataMenuId.classList, 'translateX-left-and-up')
+  }
 
-// const checkIfArrayIncludes = (array, value) => {
-//   return array.includes(value);
-// }
-
-function sliderTabOpenClose() {
-  ['.data-dropdown-slider-main-collection', '.data-dropdown-slider-fav-collection']  // pre-moves menu to correct position for open
-  .forEach((menu) => {
-    // console.log(menu)
-      const menuClassList = document.querySelector(menu).classList
-      const menuClassListValues = menuClassList.value;
-      // console.log(menuClassListValues)
-      const condition = checkIfArrayIncludes(menuClassListValues, 'translateX-left-and-up');
-      // console.log(condition);
-      if (condition) {
-        addRemoveClass('remove', menuClassList, 'translateX-left-and-up' ) // 'remove' should always equal 'remove' cause only one set of arguments applied
-      }
-    })  /* last bug update here */
-
-  const mobileOverlayClassList = document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.value; // removes black overlay if present
-  const overlayCondition = checkIfArrayIncludes(mobileOverlayClassList, 'mobile-black-overlay');
-  if (overlayCondition) {
-    addRemoveClass('remove', mobileOverlayClassList, 'mobile-black-overlay')
+  const mobileOverlayClassList = document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList;       //adds and removes mobile black overlay
+  console.log(mobileOverlayClassList.value)
+  if (window.innerWidth < 1050) {  
+        Array.from(document.querySelectorAll('.tab-slide-function'))
+          .forEach((button) => {
+            button.classList.value.includes('translateX-left')
+            ? addRemoveClass('add', mobileOverlayClassList, 'mobile-black-overlay')
+            : addRemoveClass('remove', mobileOverlayClassList, 'mobile-black-overlay')
+          })
   }
 
   Array.from(document.querySelectorAll('.tab-slide-function'))        //left and right
-  .forEach((button) => {
-    const buttonClassList = button.classList;
-    const buttonParams = buttonClassList.value.includes('translateX-left')
-      ? 'remove'
-      : 'add';
-    addRemoveClass(buttonParams, buttonClassList, 'translateX-left')
-  })
+    .forEach((button) => {
+      const buttonClassList = button.classList;
+      const buttonParams = buttonClassList.value.includes('translateX-left')
+        ? 'remove'
+        : 'add';
+      addRemoveClass(buttonParams, buttonClassList, 'translateX-left')
+    })
 
-  const menusArray = ['main-data-menu', 'fav-data-menu'];
-
-  menusArray.forEach((dataMenu) => {
-    // console.log(dataMenu)
-    const dataMenuId = document.getElementById(dataMenu);
-    // console.log(dataMenuId)
-    const dataMenuClassList = dataMenuId.classList.value;
-    const dataMenuCondition = checkIfArrayIncludes(dataMenuClassList, 'translateY-down');
-    const buttonArgs = dataMenu === 'main-data-menu'
-      ? 'main-data-dropdown'
-      : 'fav-data-menu'
-    if (dataMenuCondition) {
-      dataDropDownOpenClose(dataMenu, buttonArgs)
-      addRemoveClass('add', dataMenuId.classList, 'translateX-left-and-up')
-    }
-  })
-
-  const tabButtonsArray = Array.from(document.querySelectorAll('.slider-tab-open'));
-  const arrowButton = event.target === document.querySelector('.fa-chevron-right')
-  ? [`<i class="fa-solid fa-chevron-left"></i>`]
-  : [`<i class="fa-solid fa-chevron-right"></i>`];
-  console.log(arrowButton)
-  tabButtonsArray.forEach((button) => button.innerHTML = arrowButton);
+  const tabButtonsArray = Array.from(document.querySelectorAll('.slider-tab-open'));  //changes arrow direction
+  tabButtonsArray
+    .forEach((button) => {
+      arrowButton = button.innerHTML === `<i class="fa-solid fa-chevron-right"></i>`
+      ? `<i class="fa-solid fa-chevron-left"></i>`
+      : `<i class="fa-solid fa-chevron-right"></i>`;
+    })
+    tabButtonsArray.forEach((button) => button.innerHTML = arrowButton);
+    
+  const dataMenuCondition = checkIfArrayIncludes(dataMenuClassList, 'translateY-down');
   
-  // const whichFunction = event.target === document.querySelector('.fa-chevron-right') 
-  //   ? "sliderTabClose()"
-  //   : "mobileSliderTabOpen()"
-  // tabButtonsArray.forEach((button) => button.setAttribute("onclick", whichFunction));
+  if (dataMenuCondition) {
+    addRemoveClass('add', dataMenuId.classList, 'translateX-left-and-up')
+    dataDropDownOpenClose(id, button)
+  }
 }
-
-
-
-
-// function sliderTabOpen() {
-  // if(document.querySelector('.data-dropdown-slider-main-collection').classList.value.includes('translateX-left-and-up')) {
-  //   document.querySelector('.data-dropdown-slider-main-collection').classList.remove('translateX-left-and-up');
-  // }
-  // if(document.querySelector('.data-dropdown-slider-fav-collection').classList.value.includes('translateX-left-and-up')) {
-  //   document.querySelector('.data-dropdown-slider-fav-collection').classList.remove('translateX-left-and-up');
-  // }
-//  Array.from(document.querySelectorAll('.tab-slide-function'))
-//  .forEach((button) => button.classList.remove("translateX-left"));
-//  Array.from(document.querySelectorAll('.slider-tab-open'))
-//   .forEach((button) => button.innerHTML =`<i class="fa-solid fa-chevron-left"></i>`);
-//   Array.from(document.querySelectorAll('.slider-tab-open'))
-//   .forEach((button) => button.setAttribute("onclick", "sliderTabClose()"));
-// }
-
-// function sliderTabClose() {
-  // if(document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.value.includes('mobile-black-overlay')) {
-  //   document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.remove('mobile-black-overlay');
-  // }
-  // Array.from(document.querySelectorAll('.tab-slide-function'))
-  // .forEach((button) => button.classList.add("translateX-left"));
-  // if(document.getElementById('main-data-menu').classList.value.includes('translateY-down')) {
-  //   closeDataDropDown('main-data-menu', 'main-data-dropdown')
-  //   document.getElementById('main-data-menu').classList.add('translateX-left-and-up');
-  // }
-  // if(document.getElementById('fav-data-menu').classList.value.includes('translateY-down')) {
-  //   closeDataDropDown('fav-data-menu', 'fav-data-dropdown')
-  //   document.getElementById('fav-data-menu').classList.add('translateX-left-and-up');
-  // }
-  // Array.from(document.querySelectorAll('.slider-tab-open'))
-  // .forEach((button) => button.innerHTML =`<i class="fa-solid fa-chevron-right"></i>`);
-
-//   Array.from(document.querySelectorAll('.slider-tab-open'))
-//   .forEach((button) => button.setAttribute("onclick", "mobileSliderTabOpen()"));
-//  }
-
-
-//  function mobileSliderTabOpen() {
-//   sliderTabOpen();
-//   document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.add('mobile-black-overlay');
-// }
-
-
-// function mobileSliderTabClose() {
-//   sliderTabClose();
-//   if(document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.value.includes('mobile-black-overlay')) {
-//     document.getElementById('mobile-responsive-screen-blackout-when-menu-selected').classList.remove('mobile-black-overlay');
-//   }
-//   Array.from(document.querySelectorAll('.overlay'))
-//   .forEach((element) => {
-//     element.classList.remove('no-pointer-events')
-//   })
-// }
-
-titties 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
  document.querySelector('.favorites-collection').addEventListener("scroll", (evt) => {
   if(evt.target.scrollTop > 220) {
@@ -340,3 +234,4 @@ titties
  ['DOMContentLoaded', 'resize'].forEach((item) => addWidthListener(item))
 
 
+// still need to fix scroll functions now that sliderTabOpenClose() has been updated
