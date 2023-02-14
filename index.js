@@ -344,3 +344,5 @@ function addWidthListener(event) {
 }
 
 ["DOMContentLoaded", "resize"].forEach((item) => addWidthListener(item));
+
+
