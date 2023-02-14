@@ -120,7 +120,6 @@ function appendCharacterDataToDropDownMenu(
 }
 
 function sortAnyWay(way) {
-  // asc, desc
   [array, favoritesArray].forEach((collection) => {
     collection.sort((a, b) => {
       if (a.name > b.name) {
@@ -190,7 +189,7 @@ const mobileOverlayClassList = document.getElementById(
 ).classList;
 
 function sliderTabOpenClose(id, button) {
-  const dataMenuId = document.getElementById(id); // positions menu into position for open if it has been previous closed by slider-tab
+  const dataMenuId = document.getElementById(id); 
   const dataMenuClassList = dataMenuId.classList.value;
   const preOpenCondition = checkIfArrayIncludes(
     dataMenuClassList,
@@ -201,7 +200,6 @@ function sliderTabOpenClose(id, button) {
   }
 
   if (window.innerWidth < 1500) {
-    // add and remove mobile black overlay
     Array.from(document.querySelectorAll(".tab-slide-function")).forEach(
       (button) => {
         button.classList.value.includes("translateX-left")
@@ -219,7 +217,7 @@ function sliderTabOpenClose(id, button) {
     );
   }
 
-  Array.from(document.querySelectorAll(".tab-slide-function")) //left and right
+  Array.from(document.querySelectorAll(".tab-slide-function")) 
     .forEach((button) => {
       const buttonClassList = button.classList;
       const buttonParams = buttonClassList.value.includes("translateX-left")
@@ -230,7 +228,7 @@ function sliderTabOpenClose(id, button) {
 
   const tabButtonsArray = Array.from(
     document.querySelectorAll(".slider-tab-open")
-  ); //changes arrow direction
+  ); 
   tabButtonsArray.forEach((button) => {
     arrowButton =
       button.innerHTML === `<i class="fa-solid fa-chevron-right"></i>`
@@ -273,13 +271,49 @@ function revealNavTab() {
   sliderTabArrowDirectionChange("left");
 }
 
+function whichDataMenuButton() {
+  let button = (document.querySelector('.favorites-collection').classList.value.includes('display-none')) 
+                 ? 'main-data-dropdown'
+                 : 'fav-data-dropdown';
+      return button           
+}
+
+
+const dataMenuArray =  Array.from(document.querySelectorAll('.onscroll-event'));
+
+function onscrollCloseDataMenu() {
+    let button = whichDataMenuButton();
+   dataMenuArray
+    .forEach((element) => {
+      let id = element.id;
+      if(element.classList.value.includes('translateY-down')) {
+        addRemoveClass('add', element.classList, "translateX-left-and-up");
+        dataDropDownOpenClose(id, button)
+      }
+    })
+  
+}
+
+
+function RepositionDataMenu() {
+  dataMenuArray
+    .forEach((element) => {
+      if(element.classList.value.includes('translateX-left-and-up')) {
+        addRemoveClass('remove', element.classList, "translateX-left-and-up");
+      }    
+    })
+  
+}
+
 document
   .querySelector(".favorites-collection")
   .addEventListener("scroll", (evt) => {
     if (evt.target.scrollTop > 220) {
       hideNavTab();
+      onscrollCloseDataMenu()
     } else {
       revealNavTab();
+      RepositionDataMenu()
     }
   });
 
@@ -288,8 +322,10 @@ function onScrollHide() {
     if (window.pageYOffset > 180) {
       hideNavTab();
       addRemoveClass("remove", mobileOverlayClassList, "mobile-black-overlay");
+      onscrollCloseDataMenu();
     } else if (window.pageYOffset < 220 && window.innerWidth > 1050) {
       revealNavTab();
+      RepositionDataMenu()
     }
   };
 }
@@ -299,8 +335,10 @@ function addWidthListener(event) {
   window.addEventListener(event, () => {
     if (window.innerWidth < 1050) {
       hideNavTab();
+      onscrollCloseDataMenu()
     } else {
       revealNavTab();
+      RepositionDataMenu()
     }
   });
 }

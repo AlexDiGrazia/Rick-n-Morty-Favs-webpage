@@ -1,63 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="responsive.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Satisfy&display=swap" rel="stylesheet">
-<script src="https://kit.fontawesome.com/710d95f475.js" crossorigin="anonymous"></script>
-  <title>My Favorites Rick and Morty
-  </title>
-</head>
-<body>
-  
-  <section class="main-collection" id="pageTop">
-    <nav class="navbar">
-      <img src="ricknmorty.png" width="200" alt="list rick and morty episodes wikipedia" /></img>
-        <button onclick="sliderTabOpenClose('main-data-menu', 'main-data-dropdown')" class="tab-slide-function border slider-tab-open button-styles position-fixed"><i class="fa-solid fa-chevron-left"></i></button>
-        <button onclick="sortAnyWay('asc')" class="tab-slide-function border alphabetize button-styles position-fixed" id="alphabetize-main">A - Z</button>
-        <button onclick="sortAnyWay('desc')" class="tab-slide-function border z-a button-styles position-fixed" id="z-a-main">Z - A</button>
-        <button onclick="goToCollection('favorites')" class="tab-slide-function border go-to-favorites-collection button-styles position-fixed">Favorites <i class="fa-solid fa-arrow-right"></i></button>
-        <button onclick="dataDropDownOpenClose('main-data-menu', 'main-data-dropdown')" class="tab-slide-function border open-data-dropdown-main-collection button-styles position-fixed" id="main-data-dropdown">See Data</button>
-    </nav>
-    <h3>Main Collection</h3>
-    <div id="main-data-menu" class="data-dropdown-slider-main-collection border main-data position-fixed data-fixed-position">
-    </div>
-    <div class="main card-container">
-    
-    </div>
-  </section>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="responsive.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Satisfy&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/710d95f475.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>My Favorites Rick and Morty</title>
+  </head>
+  <body>
+    <section class="main-collection" id="pageTop">
+      <nav class="navbar">
+        <img
+          src="ricknmorty.png"
+          width="200"
+          alt="list rick and morty episodes wikipedia"
+        />
+        <button
+          onclick="sliderTabOpenClose('main-data-menu', 'main-data-dropdown')"
+          class="tab-slide-function border slider-tab-open button-styles position-fixed"
+        >
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button
+          onclick="sortAnyWay('asc')"
+          class="tab-slide-function border alphabetize button-styles position-fixed"
+          id="alphabetize-main"
+        >
+          A - Z
+        </button>
+        <button
+          onclick="sortAnyWay('desc')"
+          class="tab-slide-function border z-a button-styles position-fixed"
+          id="z-a-main"
+        >
+          Z - A
+        </button>
+        <button
+          onclick="goToCollection('favorites')"
+          class="tab-slide-function border go-to-favorites-collection button-styles position-fixed"
+        >
+          Favorites <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <button
+          onclick="dataDropDownOpenClose('main-data-menu', 'main-data-dropdown')"
+          class="tab-slide-function border open-data-dropdown-main-collection button-styles position-fixed"
+          id="main-data-dropdown"
+        >
+          See Data
+        </button>
+      </nav>
+      <h3>Main Collection</h3>
+      <div
+        id="main-data-menu"
+        class="data-dropdown-slider-main-collection border main-data position-fixed onscroll-event"
+      ></div>
+      <div class="main card-container"></div>
+    </section>
 
-  <section class="favorites-collection display-none" >
-    <nav class="navbar">
-      <img class="logo-on-favorites-page" src="ricknmorty.png" width="200" alt="list rick and morty episodes wikipedia" /></img>
-      <button onclick="sliderTabOpenClose('fav-data-menu', 'fav-data-dropdown')" class="tab-slide-function border slider-tab-open button-styles position-fixed"><i class="fa-solid fa-chevron-left"></i></button>
-      <button onclick="sortAnyWay('asc')" class="tab-slide-function border alphabetize button-styles position-fixed" id="alphabetize-fav">A - Z</button>
-      <button onclick="sortAnyWay('desc')" class="tab-slide-function border z-a button-styles position-fixed" id="z-a-main">Z - A</button>
-      <button onclick="goToCollection('main')" class="tab-slide-function border go-back-to-main-collection button-styles position-fixed"><i class="fa-solid fa-arrow-left"></i> Main</button>
-      <button onclick="dataDropDownOpenClose('fav-data-menu', 'fav-data-dropdown')" class="tab-slide-function border open-data-dropdown-fav-collection button-styles position-fixed" id="fav-data-dropdown">See Data</button>
-    </nav>
-    <h3>Favorites Collection</h3>
-    <div id="fav-data-menu" class="data-dropdown-slider-fav-collection border favorite-data position-fixed data-fixed-position"></div>
-    <div id="pageTopFavorites" class="favorites card-container">
-      <a id="scrollUpFavorites" class="border button-styles" href="#pageTopFavorites">
-        <i class="fa-solid fa-arrow-up-long"></i>
-      </a> 
-    </div>
-  </Section>
-  <a id="scrollUp" class="border button-styles" href="#pageTop">
-    <i class="fa-solid fa-arrow-up-long"></i>
+    <section class="favorites-collection display-none">
+      <nav class="navbar">
+        <img
+          class="logo-on-favorites-page"
+          src="ricknmorty.png"
+          width="200"
+          alt="list rick and morty episodes wikipedia"
+        />
+        <button
+          onclick="sliderTabOpenClose('fav-data-menu', 'fav-data-dropdown')"
+          class="tab-slide-function border slider-tab-open button-styles position-fixed"
+        >
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button
+          onclick="sortAnyWay('asc')"
+          class="tab-slide-function border alphabetize button-styles position-fixed"
+          id="alphabetize-fav"
+        >
+          A - Z
+        </button>
+        <button
+          onclick="sortAnyWay('desc')"
+          class="tab-slide-function border z-a button-styles position-fixed"
+          id="z-a-main"
+        >
+          Z - A
+        </button>
+        <button
+          onclick="goToCollection('main')"
+          class="tab-slide-function border go-back-to-main-collection button-styles position-fixed"
+        >
+          <i class="fa-solid fa-arrow-left"></i> Main
+        </button>
+        <button
+          onclick="dataDropDownOpenClose('fav-data-menu', 'fav-data-dropdown')"
+          class="tab-slide-function border open-data-dropdown-fav-collection button-styles position-fixed"
+          id="fav-data-dropdown"
+        >
+          See Data
+        </button>
+      </nav>
+      <h3>Favorites Collection</h3>
+      <div
+        id="fav-data-menu"
+        class="data-dropdown-slider-fav-collection border favorite-data position-fixed onscroll-event"
+      ></div>
+      <div id="pageTopFavorites" class="favorites card-container">
+        <a
+          id="scrollUpFavorites"
+          class="border button-styles"
+          href="#pageTopFavorites"
+        >
+          <i class="fa-solid fa-arrow-up-long"></i>
+        </a>
+      </div>
+    </section>
+    <a id="scrollUp" class="border button-styles" href="#pageTop">
+      <i class="fa-solid fa-arrow-up-long"></i>
     </a>
-    <section id="mobile-responsive-screen-blackout-when-menu-selected">
+    <section
+      id="mobile-responsive-screen-blackout-when-menu-selected"
+    ></section>
 
-    </section>  
- 
-  <script src="index.js" type="text/javascript"></script>
-</body>
+    <script src="index.js" type="text/javascript"></script>
+  </body>
 </html>
